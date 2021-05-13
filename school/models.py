@@ -28,8 +28,6 @@ class Status:
 class PresenceStatus(models.Model):
     person = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject_class = models.ForeignKey(Subject, on_delete=models.CASCADE)
-
-
     presence_status = models.CharField(max_length=7, choices= Status.CHOICES)
 
     def __str__(self):
