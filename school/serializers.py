@@ -8,6 +8,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class SubjectSerializer(serializers.ModelSerializer):
+    students = StudentSerializer(allow_null=True) #thanks to this list of students can be empty
     class Meta:
         model = Subject
         fields = '__all__'

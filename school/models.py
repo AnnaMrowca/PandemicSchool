@@ -12,7 +12,8 @@ class Student(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=200)
-    students = models.ManyToManyField(Student,related_name='subjects')
+    students = models.ManyToManyField(Student,related_name='subjects', null=True, blank=True)
+    #null=True, blank=True mean that list can be empty + I have to do makemigrations + migrate
 
 
     def __str__(self):
