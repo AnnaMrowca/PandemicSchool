@@ -19,17 +19,17 @@ class Subject(models.Model):
     def __str__(self):
         return self.name
 
-class Status:
+class Status: #enum
     PRESENT = 'present'
-    COVID = 'covid'
-    ABSENT = 'absent'
+    COVID = 'absent - covid'
+    ABSENT = 'absent - other'
 
-    CHOICES = [(PRESENT, 'present'), (COVID,'covid'), (ABSENT, 'absent')]
+    CHOICES = [(PRESENT, 'present'), (COVID,'absent - covid'), (ABSENT, 'absent - other')]
 
 class PresenceStatus(models.Model):
     person = models.ForeignKey(Student, on_delete=models.CASCADE)
     subject_class = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    presence_status = models.CharField(max_length=7, choices= Status.CHOICES)
+    presence_status = models.CharField(max_length=30, choices= Status.CHOICES)
 
     def __str__(self):
         return f'{self.person.name} {self.person.surname} {self.subject_class} {self.presence_status}'

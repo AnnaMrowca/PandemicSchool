@@ -3,7 +3,8 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import PresenceStatusSerializer, StudentSerializer, SubjectSerializer, StatusSerializer
 from .models import PresenceStatus, Student, Subject, Status
-from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework import mixins, generics
 
 
 #viewset created smart (CRUD) - does the same as the @api view
@@ -19,9 +20,13 @@ class SubjectViewSet(ModelViewSet):
     queryset = Subject.objects.all()
     serializer_class = SubjectSerializer
 
-class PresenceStatusSet(ModelViewSet):
+class StudentPresenceStatusSet(ModelViewSet):
     queryset = PresenceStatus.objects.all()
     serializer_class = PresenceStatusSerializer
+
+class StatusViewSet(mixins.ListModelMixin, GenericViewSet):
+    queryset = PresenceStatus.objects.all()
+    serializer_class = StatusSerializer
 
 
 #REFACTORING - embedded code form Django Rest Framework above
